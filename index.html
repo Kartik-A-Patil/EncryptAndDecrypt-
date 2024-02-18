@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Encryption and Decryption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"], textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: calc(100% - 20px);
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top:10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        textarea {
+            height: 100px;
+            resize: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 10px;
+        }
+        label {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Message Encryption and Decryption</h2>
+        <label for="key">Key:</label>
+        <input type="password" id="key" placeholder="Enter key">
+        <label for="message">Message:</label>
+        <textarea id="message" placeholder="Enter your message"></textarea>
+        <button onclick="encrypt()">Encrypt</button>
+        <button onclick="decrypt()">Decrypt</button>
+        <label for="output">Output:</label>
+        <textarea id="output" placeholder="Output will appear here" readonly></textarea>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script>
+        function encrypt() {
+            var key = document.getElementById('key').value;
+            var message = document.getElementById('message').value;
+
+            var encryptedMessage = CryptoJS.AES.encrypt(message, key).toString();
+
+            document.getElementById('output').value = encryptedMessage;
+        }
+
+        function decrypt() {
+            var key = document.getElementById('key').value;
+            var encryptedMessage = document.getElementById('message').value;
+
+            var decryptedMessage = CryptoJS.AES.decrypt(encryptedMessage, key).toString(CryptoJS.enc.Utf8);
+
+            document.getElementById('output').value = decryptedMessage;
+        }
+    </script>
+</body>
+</html>
