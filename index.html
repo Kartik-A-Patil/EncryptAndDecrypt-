@@ -85,9 +85,12 @@
             var key = document.getElementById('key').value;
             var encryptedMessage = document.getElementById('message').value;
 
-            var decryptedMessage = CryptoJS.AES.decrypt(encryptedMessage, key).toString(CryptoJS.enc.Utf8);
-
-            document.getElementById('output').value = decryptedMessage;
+            try {
+                var decryptedMessage = CryptoJS.AES.decrypt(encryptedMessage, key).toString(CryptoJS.enc.Utf8);
+                document.getElementById('output').value = decryptedMessage;
+            } catch (error) {
+                alert('Wrong password! Please enter the correct key for decryption.');
+            }
         }
     </script>
 </body>
